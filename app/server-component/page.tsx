@@ -5,13 +5,26 @@ type Todo = {
   completed: boolean;
 };
 
+// Force the page to be server-rendered on every request
+export const dynamic = 'force-dynamic';
+
 const fetchTodos = async (): Promise<Todo[]> => {
-  const todosURL = await fetch(
-    "https://jsonplaceholder.typicode.com/todos?_start=0&_limit=14",
-    { cache: 'no-store' }
-  );
-  const todosList = await todosURL.json();
-  return todosList;
+  try {
+    const todosURL = await fetch(
+      "https://jsonplaceholder.typicode.com/todos?_start=0&_limit=14",
+      { cache: 'no-store' }
+    );
+    
+    if (!todosURL.ok) {
+      throw new Error(`Failed to fetch todos: ${todosURL.status}`);
+    }
+    
+    const todosList = await todosURL.json();
+    return todosList;
+  } catch (error) {
+    console.error('Error fetching todos:', error);
+    return []; // Return empty array or handle error appropriately
+  }
 };
 
 export default async function Todos() {
