@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      <div>Next.js on Deno</div>
+      <div>Next.js on Deno Deploy</div>
     </main>
   );
 }
