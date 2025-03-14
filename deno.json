@@ -1,3 +1,6 @@
 {
+  "tasks": {
+    "generate-deno-types": "deno types > lib.deno.d.ts"
+  },
   "unstable": ["unsafe-proto"]
 }
